@@ -1,3 +1,24 @@
+
+🌟 Day 1 of the GFG160 Challenge 🌟
+
+🚀 Problem Solved: Find the Second Largest Element in an Array
+
+💡 Approach:
+Implemented an efficient O(n) time complexity and O(1) space complexity solution using a single-pass search. This approach ensures we identify the second largest element with just one traversal of the array.
+
+✅ Steps:
+1️⃣ Maintain two variables, largest and secondLargest, initialized to -1 (or another suitable minimum).
+2️⃣ Traverse the array:
+       - If the current element is greater than largest, update secondLargest to largest and largest to the current element.
+       - Else if the current element is smaller than largest but greater than secondLargest, update secondLargest.
+3️⃣ At the end of the traversal, secondLargest holds the result.
+
+💻 Complexity:
+Time: O(n) – Single traversal through the array.
+Space: O(1) – No extra memory used.
+🎯 Key Takeaway: A single-pass search is a powerful technique to solve problems with optimal efficiency, especially in scenarios involving comparisons and tracking multiple values without sacrificing clarity or performance.
+
+
 // C++ program to find the second largest element in the array
 // using one traversal
 
