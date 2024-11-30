@@ -1,0 +1,44 @@
+🌟 Day 3 of the GFG160 Challenge 🌟
+
+🚀 Problem Solved: Reverse an Array
+
+💡 Approach:
+Used an efficient O(n) time complexity and O(1) space complexity approach by swapping elements in-place. This technique minimizes memory usage and ensures the array is reversed in a single traversal.
+
+✅ Steps:
+1️⃣ Use two pointers: one at the start (i = 0) and the other at the end (n - i - 1) of the array.
+2️⃣ Swap the elements at these positions and move the pointers towards the center.
+3️⃣ Continue until the pointers meet, effectively reversing the array.
+
+💻 Complexity:
+Time: O(n) – Each element is swapped once.
+Space: O(1) – Operations are performed directly on the array.
+
+🎯 Key Takeaway: In-place algorithms like this one showcase how simple yet powerful optimizations can make a big difference in solving problems efficiently.
+
+// C++ Program to reverse an array by swapping elements
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// function to reverse an array
+void reverseArray(vector<int> &arr) {
+    int n = arr.size();
+    
+    // Iterate over the first half and for every index i,
+    // swap arr[i] with arr[n - i - 1]
+    for(int i = 0; i < n/2; i++) {
+        swap(arr[i], arr[n - i - 1]);
+    }
+}
+
+int main() {
+    vector<int> arr = { 1, 4, 3, 2, 6, 5 };
+
+    reverseArray(arr);
+  
+    for(int i = 0; i < arr.size(); i++) 
+        cout << arr[i] << " ";
+    return 0;
+}
