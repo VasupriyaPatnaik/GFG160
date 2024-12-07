@@ -7,13 +7,12 @@
 ✅ Steps to Solve:
 1️⃣ Initialize Variables: Start with the first element as both maxEnding (current subarray sum) and res (maximum sum).
 2️⃣ Iterate through the Array:
-
-For each element, decide whether to extend the previous subarray or start a new one.
-Update maxEnding as max(maxEnding + arr[i], arr[i]).
+     - For each element, decide whether to extend the previous subarray or start a new one.
+     - Update maxEnding as max(maxEnding + arr[i], arr[i]).
 3️⃣ Track Maximum Sum: Update res if maxEnding exceeds it.
 4️⃣ Return the maximum sum (res).
-🎯 Key Takeaway:
-Kadane's Algorithm efficiently calculates the maximum subarray sum by dynamically deciding whether to extend the current subarray or start a new one, all in a single traversal.
+
+🎯 Key Takeaway: Kadane's Algorithm efficiently calculates the maximum subarray sum by dynamically deciding whether to extend the current subarray or start a new one, all in a single traversal.
 
 💻 Complexity:
 
