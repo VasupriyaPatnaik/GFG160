@@ -1,0 +1,57 @@
+🌟 Day 21: #GFG160 Challenge 🌟
+
+🚀 Problem: Sort an Array of 0s, 1s, and 2s
+
+💡 Approach: Applied the Dutch National Flag Algorithm:
+1️⃣ Use three pointers lo, mid, and hi to divide the array into sections:
+arr[0...lo-1]: Zeros
+arr[lo...mid-1]: Ones
+arr[hi+1...n-1]: Twos
+2️⃣ Traverse the array while mid <= hi and handle:
+If arr[mid] == 0, swap with arr[lo] and increment lo and mid.
+If arr[mid] == 1, increment mid.
+If arr[mid] == 2, swap with arr[hi] and decrement hi.
+💻 Complexity:
+
+Time: O(n), single traversal.
+Space: O(1), in-place sorting.
+
+🔑 Result: Array sorted efficiently in one pass! ✅
+
+// C++ program to sort an array of 0s, 1s and 2s 
+// using Dutch National Flag Algorithm
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to sort an array of 0s, 1s and 2s
+void sort012(vector<int> &arr) {
+    int n = arr.size();
+    int lo = 0;
+    int hi = n - 1;
+    int mid = 0;
+
+    // Iterate till all the elements
+    // are sorted
+    while (mid <= hi) {
+        if (arr[mid] == 0)
+            swap(arr[lo++], arr[mid++]);
+        else if (arr[mid] == 1)
+            mid++;
+        else
+            swap(arr[mid], arr[hi--]);
+    }
+}
+
+int main() {
+    vector<int> arr = { 0, 1, 2, 0, 1, 2 };
+    int n = arr.size();
+
+    sort012(arr);
+
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+
+    return 0;
+}
