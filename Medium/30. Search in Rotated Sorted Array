@@ -1,0 +1,75 @@
+🌟 Day 30: GFG160 Challenge 🌟
+
+🚀 Problem: Search in Rotated Sorted Array
+Given a sorted and rotated array, find the index of a target key or return -1 if not found.
+
+💡 Approach:
+1️⃣ Use Binary Search (O(log n)):
+     - Identify if the left or right half is sorted.
+     - If the key lies in the sorted half, move there; otherwise, move to the other half.
+2️⃣ If the key equals arr[mid], return mid.
+3️⃣ Repeat until the key is found or the array is fully traversed.
+
+Time Complexity: O(log n) — Binary search halves the array at each step.
+Space Complexity: O(1) — No extra space is used.
+
+🔑 Result: Efficiently locate the target in a rotated sorted array!
+
+// C++ program to search an element in sorted and rotated 
+// array using binary search
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int search(vector<int>& arr, int key) {
+  
+    // Initialize two pointers, lo and hi, at the start
+    // and end of the array
+    int lo = 0, hi = arr.size() - 1;
+
+    while (lo <= hi) {
+        int mid = lo + (hi - lo) / 2;
+
+        // If key found, return the index
+        if (arr[mid] == key)
+            return mid;
+
+        // If Left half is sorted
+        if (arr[mid] >= arr[lo]) {
+          
+            // If the key lies within this sorted half,
+            // move the hi pointer to mid - 1
+            if (key >= arr[lo] && key < arr[mid])
+                hi = mid - 1;
+          
+            // Otherwise, move the lo pointer to mid + 1
+            else
+                lo = mid + 1;
+        }
+      
+        // If Right half is sorted
+        else {
+          
+            // If the key lies within this sorted half,
+            // move the lo pointer to mid + 1
+            if (key > arr[mid] && key <= arr[hi])
+                lo = mid + 1;
+          
+            // Otherwise, move the hi pointer to mid - 1
+            else
+                hi = mid - 1;
+        }
+    }
+    
+      // Key not found
+    return -1; 
+}
+
+int main() {
+    vector<int> arr1 = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+    int key1 = 3;
+    cout << search(arr1, key1) << endl;
+
+    return 0;
+}
