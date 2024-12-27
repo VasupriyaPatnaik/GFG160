@@ -1,0 +1,50 @@
+🌟 Day 2 of the GFG160 Challenge 🌟
+
+🚀 Problem Solved: Push Zeros to the End of an Array
+
+💡 Approach: Achieved the solution in O(n) time complexity and O(1) space complexity using a single traversal of the array. This in-place algorithm efficiently rearranges the elements without extra memory allocation.
+
+✅ Steps:
+1️⃣ Use a pointer count to track the next position for a non-zero element.
+2️⃣ Traverse the array once. For every non-zero element, swap it with the element at the count index.
+3️⃣ Increment count after each swap to ensure all zeros move to the right while maintaining the relative order of non-zero elements. 
+
+💻 Complexity:
+Time: O(n) – Single traversal through the array.
+Space: O(1) – In-place rearrangement without extra memory.
+
+🎯 Key Takeaway: This efficient approach showcases how powerful in-place algorithms can be for optimizing space and runtime in array manipulation tasks.
+
+
+// C++ Program to move all zeros to end using one traversal
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function which pushes all zeros to end of array
+void pushZerosToEnd(vector<int>& arr) {
+  
+    // Pointer to track the position for next non-zero element
+    int count = 0;
+     
+    for (int i = 0; i < arr.size(); i++) {
+
+        // If the current element is non-zero
+        if (arr[i] != 0) {
+          
+            // Swap the current element with the 0 at index 'count'
+            swap(arr[i], arr[count]);
+            // Move 'count' pointer to the next position
+            count++;
+        }
+    }
+}
+
+int main() {
+    vector<int> arr = {1, 2, 0, 4, 3, 0, 5, 0};
+    pushZerosToEnd(arr);
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    return 0;
+}
