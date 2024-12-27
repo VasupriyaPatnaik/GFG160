@@ -1,0 +1,49 @@
+🌟 Day 7 of the GFG160 Challenge 🌟
+
+🚀 Problem Solved: Stock Buy and Sell – Multiple Transactions Allowed
+
+💡 Approach Used:
+Implemented an O(n) time complexity and O(1) space complexity solution by accumulating profits directly as prices increase, avoiding unnecessary condition checks. This streamlined method ensures the maximum profit is calculated efficiently.
+
+✅ Steps:
+1️⃣ Iterate through the array of stock prices.
+2️⃣ If the current day’s price is higher than the previous day’s, add the difference to the result.
+3️⃣ Continue accumulating profits for all increasing price sequences.
+
+🎯 Key Takeaway:
+
+Efficient Profit Accumulation: By focusing on consecutive price differences during upward trends, this approach eliminates unnecessary checks for local minima and maxima.
+Optimal for Multiple Transactions: Handles scenarios with frequent buy-sell cycles in a clean, logical manner.
+
+💻 Complexity:
+
+Time Complexity: O(n) – Single traversal of the price array.
+Space Complexity: O(1) – In-place computation using minimal variables.
+
+
+
+// C++ Program to find the max profit when multiple
+// transactions are allowed
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int maximumProfit(const vector<int>& prices) {
+    int res = 0;
+  
+    // Keep on adding the difference between
+    // adjacent when the prices a
+    for (int i = 1; i < prices.size(); i++) {
+        if (prices[i] > prices[i - 1]) 
+            res += prices[i] - prices[i - 1];
+    }
+    
+    return res;
+}
+
+int main() {
+    vector<int> prices = { 100, 180, 260, 310, 40, 535, 695 };
+    cout << maximumProfit(prices) << endl;
+    return 0;
+}
