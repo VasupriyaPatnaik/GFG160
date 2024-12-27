@@ -1,0 +1,82 @@
+🌟 Day 15 of the GFG160 Challenge 🌟
+
+🚀 Problem Solved: Add Binary Strings
+
+💡 Approach Used: Bit-by-bit addition with carry
+
+🔑 Steps:
+1️⃣ Trim leading zeros from both strings.
+2️⃣ Start from the last character of both strings.
+3️⃣ Compute the digit sum and handle carry for each step.
+4️⃣ If there's an additional carry, prepend '1' to the result.
+
+🎯 Key Takeaways:
+
+✅ Handles binary addition efficiently with carry management.
+✅ Ensures the output string has no leading zeros.
+
+💻 Complexity:
+
+Time Complexity: O(n + m) – for traversing both strings.
+Space Complexity: O(n) – for the result string, considering immutability in most languages.
+
+
+// C++ program to add two binary strings
+// using Bit-by-Bit addition
+#include <iostream>
+using namespace std;
+
+// Function to trim leading zeros from a binary string
+string trimLeadingZeros(const string &s) {
+    // Find the position of the first '1'
+    size_t firstOne = s.find('1');
+    return (firstOne == string::npos) ? "0" : s.substr(firstOne);
+}
+
+// This function adds two binary strings and returns
+// the result as a third string
+string addBinary(string s1, string s2) {
+    // Trim leading zeros
+    s1 = trimLeadingZeros(s1);
+    s2 = trimLeadingZeros(s2);
+
+    int n = s1.size();
+    int m = s2.size();
+
+    // Ensure s1 is always the longer string
+    if (n < m) {
+        swap(s1, s2);
+        swap(n, m);
+    }
+
+    string result(n, '0');
+    int carry = 0, j = m - 1;
+
+    // Traverse both strings from the end
+    for (int i = n - 1; i >= 0; i--) {
+        int bit1 = s1[i] - '0';
+        int sum = bit1 + carry;
+
+        if (j >= 0) {
+            int bit2 = s2[j] - '0';
+            sum += bit2;
+            j--;
+        }
+
+        result[i] = (sum % 2) + '0'; // Result bit
+        carry = sum / 2;            // Carry bit
+    }
+
+    // If there's any carry left, prepend it to the result
+    if (carry > 0) {
+        result = '1' + result;
+    }
+
+    return result;
+}
+
+int main() {
+    string s1 = "1101", s2 = "111";
+    cout << addBinary(s1, s2) << endl;
+    return 0;
+}
