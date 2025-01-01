@@ -1,0 +1,49 @@
+🌟 Day 35: GFG160 Challenge 🌟
+
+🚀 Problem: Kth Missing Positive Number in a Sorted Array
+Given a sorted array arr[] of distinct positive integers, find the k-th positive number missing from the array.
+
+💡 Approach:
+1️⃣ Use Binary Search to optimize the search for the index i where arr[i] > (k + i).
+2️⃣ The k-th missing number is calculated as k + i.
+
+⏳ Complexity:
+Time: O(log n)
+Space: O(1)
+
+🔑 Result: Efficiently found the k-th missing positive number using binary search! ✅
+
+
+// C++ Program to find Kth missing positive number
+// using Binary Search
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Function to find the k-th missing positive number
+int kthMissing(vector<int> &arr, int k) {
+    int lo = 0, hi = arr.size() - 1;
+    int res = arr.size() + k;
+
+    // Binary Search for index where arr[i] > (i + k)
+    while (lo <= hi) {
+        int mid = (lo + hi) / 2;
+        if (arr[mid] > mid + k) {
+            res = mid + k;
+            hi = mid - 1;
+        }
+        else {
+            lo = mid + 1;
+        }
+    }
+
+    return res;
+}
+
+int main() {
+    vector<int> arr = {2, 3, 4, 7, 11};
+    int k = 5;
+    cout << kthMissing(arr, k);
+    return 0;
+}
