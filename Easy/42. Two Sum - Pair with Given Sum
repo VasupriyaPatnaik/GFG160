@@ -1,0 +1,60 @@
+🌟 Day 42: GFG160 Challenge 🌟
+
+🚀 Problem: Two Sum - Pair with Given Sum
+
+💡 Approach:
+1️⃣ Create an empty Hash Set.
+2️⃣ Traverse the array:
+        For each number, calculate the complement (target - current number).
+              - If the complement exists in the set, the pair is found.
+              - If not, add the current number to the set.
+              
+⏳ Complexity:
+Time: O(n)
+Space: O(n)
+
+🔑 Result: Found the pair that sums to the target efficiently using a Hash Set! 🎯
+
+
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+// Function to check whether any pair exists
+// whose sum is equal to the given target value
+bool twoSum(vector<int> &arr, int target){
+  
+    // Create an unordered_set to store the elements
+    unordered_set<int> s;
+
+    // Iterate through each element in the vector
+    for (int i = 0; i < arr.size(); i++){
+
+        // Calculate the complement that added to
+        // arr[i], equals the target
+        int complement = target - arr[i];
+
+        // Check if the complement exists in the set
+        if (s.find(complement) != s.end())
+            return true;
+
+        // Add the current element to the set
+        s.insert(arr[i]);
+    }
+  
+    // If no pair is found
+    return false;
+}
+
+int main(){
+    vector<int> arr = {0, -1, 2, -3, 1};
+    int target = -2;
+
+    if (twoSum(arr, target))
+        cout << "true";
+    else
+        cout << "false";
+
+    return 0;
+}
