@@ -2,99 +2,16 @@
 
 🚀 Problem: Set Matrix Zeroes
 
-💡 Optimized Approach:
-Modify the matrix in O(1) Space by using the first row and column as markers:
-1️⃣ Traverse the matrix. For each cell (i,j) where mat[i][j]=0:
+💡 Approach:
+    Efficiently modify a matrix to set rows and columns to zero if any cell is 0, using O(1) Space:
+             1️⃣ Traverse the matrix to mark the first row and column as indicators.
+             2️⃣ Use these markers to update the matrix from (1,1) to (n−1,m−1).
+             3️⃣ Finally, update the first row and column based on their markers.
 
-Mark 
-mat[i][0]
-=
-0
-mat[i][0]=0 (row marker).
-Mark 
-mat[0][j]
-=
-0
-mat[0][j]=0 (column marker).
-If 
-𝑗
-=
-0
-j=0, use an extra variable 
-𝑐
-0
-c0 to mark the first column.
-2️⃣ Update the inner matrix 
-(
-1
-,
-1
-)
- to 
-(
-𝑛
-−
-1
-,
-𝑚
-−
-1
-)
-(1,1) to (n−1,m−1):
-Set 
-mat[i][j]
-=
-0
-mat[i][j]=0 if 
-mat[i][0]
-=
-0
-mat[i][0]=0 or 
-mat[0][j]
-=
-0
-mat[0][j]=0.
-3️⃣ Finally, update the first row and first column:
-If 
-mat[0][0]
-=
-0
-mat[0][0]=0, set the entire first row to 0.
-If 
-𝑐
-0
-=
-0
-c0=0, set the entire first column to 0.
-⏳ Complexity:
+⏳ Time Complexity: O(n×m)
+⏳ Space Complexity: O(1)
 
-Time: 
-𝑂
-(
-𝑛
-×
-𝑚
-)
-O(n×m).
-Space: 
-𝑂
-(
-1
-)
-O(1).
-🔑 Result: Successfully updated the matrix with zeroes in constant space! 🏆
-
-
-
-
-
-
-
-
-
-
-
-
+🔑 Result: Achieved constant space optimization for this matrix transformation! 💪
 
 
 // C++ code to implement Set Matrix Zeroes using
