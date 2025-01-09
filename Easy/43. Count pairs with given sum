@@ -1,0 +1,51 @@
+🌟 Day 43: GFG160 Challenge 🌟
+
+🚀 Problem: Count pairs with a given sum
+
+💡 Approach:
+Use a Hash Map for efficient computation:
+1️⃣ Traverse the array and calculate the complement for each element as target−current_number.
+2️⃣ Check if the complement exists in the map. If yes, increment the count by the occurrences of the complement.
+3️⃣ Add the current number to the map with its count.
+
+⏳ Complexity:
+
+Time: O(n)
+Space: O(n)
+
+🔑 Result: Counted pairs efficiently using hashing! 🏆
+
+// C++ Program to count pairs with given sum
+// using Hash Map
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+// Returns number of pairs in arr[0...n-1] with sum 
+// equal to 'target'
+int countPairs(vector<int>& arr, int target) {
+    unordered_map<int, int> freq;
+    int cnt = 0;
+
+    for (int i = 0; i < arr.size(); i++) {
+      
+        // Check if the complement (target - arr[i])
+        // exists in the map. If yes, increment count
+        if (freq.find(target - arr[i]) != freq.end()) {
+            cnt += freq[target - arr[i]]; 
+        }
+      
+        // Increment the frequency of arr[i]
+        freq[arr[i]]++; 
+    }
+    return cnt;
+}
+
+int main() {
+    vector<int> arr = {1, 5, 7, -1, 5}; 
+    int target = 6; 
+    cout << countPairs(arr, target);    
+    return 0;
+}
