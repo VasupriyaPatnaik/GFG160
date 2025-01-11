@@ -1,41 +1,19 @@
 🌟 Day 45: GFG160 Challenge 🌟
+
 🚀 Problem: Intersection of Two Arrays with Duplicate Elements
 
 💡 Approach:
 1️⃣ Create a Hash Set as to store unique elements of array a[].
 2️⃣ Use another Hash Set rs to track elements in the result.
 3️⃣ Traverse array b[]:
-
-If an element exists in as but not in rs, add it to the result and rs.
+            - If an element exists in as but not in rs, add it to the result and rs.
 4️⃣ Return the result array.
+
 ⏳ Complexity:
 
-Time: 
-𝑂
-(
-𝑛
-+
-𝑚
-)
-O(n+m), where 
-𝑛
-n and 
-𝑚
-m are the sizes of arrays 
-𝑎
-[
-]
-a[] and 
-𝑏
-[
-]
-b[].
-Space: 
-𝑂
-(
-𝑛
-)
-O(n).
+Time: O(n+m), where n and m are the sizes of arrays a[] and b[].
+Space: O(n)
+
 🔑 Result: Successfully found the intersection of two arrays with unique elements! 🏆
 
 
