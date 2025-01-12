@@ -1,0 +1,54 @@
+🌟 Day 46: GFG160 Challenge 🌟
+
+🚀 Problem: Union of Arrays with Duplicates
+
+💡 Approach:
+1️⃣ Use a Hash Set to store unique elements from both arrays.
+2️⃣ Add all elements of a[] and b[] to the set, which automatically handles duplicates.
+3️⃣ Convert the set to the final union array if needed.
+
+⏳ Complexity:
+Time: O(n+m), where n and m are the sizes of the arrays.
+Space: O(n+m).
+
+🔑 Result: Efficiently computed the union of two arrays with distinct elements! 🏆
+
+
+// C++ program to find union of two arrays
+
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+vector<int> findUnion(vector<int>& a, vector<int>& b) {
+      unordered_set<int> st;  
+  
+    // Put all elements of a[] in st
+    for (int i = 0; i < a.size(); i++) 
+          st.insert(a[i]);
+      
+      // Put all elements of b[] in st
+    for (int i = 0; i < b.size(); i++) 
+          st.insert(b[i]);
+      
+    vector<int> res;                            
+      
+      // iterate through the set to fill the result array 
+      for(auto it: st) 
+          res.push_back(it);
+    
+    return res;
+}
+
+int main() {
+    vector<int> a = {1, 2, 3, 2, 1};
+    vector<int> b = {3, 2, 2, 3, 3, 2};
+
+    vector<int> res = findUnion(a, b);
+  
+    for (int i = 0; i < res.size(); i++) 
+        cout << res[i] << " ";
+
+    return 0;
+}
