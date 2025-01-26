@@ -1,0 +1,51 @@
+🌟 Day 61: GFG160 Challenge 🌟
+
+🔗 Problem: Equilibrium Point
+
+💡 Approach:
+1️⃣ Compute total sum of the array.
+2️⃣ Traverse while maintaining prefix sum.
+3️⃣ At each index, check if left sum = right sum (total sum - prefix sum - arr[i]).
+4️⃣ If found, return the index; otherwise, return -1.
+
+⏳ Complexity:
+Time: O(n) ⏳ | Space: O(1) 💡
+
+✅ Found the first equilibrium index efficiently! 🎯
+
+
+// C++ program to find equilibrium index of an array
+// using prefix sum and suffix sum variables
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int equilibriumPoint(vector<int>& arr) {
+    int prefSum = 0, total = 0;
+
+    // Calculate the array sum
+    for (int ele: arr) {
+        total += ele;
+    }
+
+    // Iterate pivot over all the elements of the array and
+    // till left != right
+    for (int pivot = 0; pivot < arr.size(); pivot++) {
+          int suffSum = total - prefSum - arr[pivot];
+          if (prefSum == suffSum) {
+              return pivot;
+        }
+          prefSum += arr[pivot];
+    }
+
+    // there is no equilibrium point
+    return -1;
+}
+
+int main() {
+    vector<int> arr = { 1, 7, 3, 6, 5, 6 };
+
+    cout << equilibriumPoint(arr) << endl;
+    return 0;
+}
