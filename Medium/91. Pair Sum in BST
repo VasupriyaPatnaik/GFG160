@@ -1,0 +1,93 @@
+🌟 Day 91: GFG160 Challenge 🌟
+
+🔗 Problem: Pair Sum in BST
+
+💡 Approach: Hash Set
+1️⃣ Store visited nodes in a HashSet.
+2️⃣ Check if (target - current node’s value) exists in the set.
+3️⃣ If found, return true; otherwise, continue traversal.
+
+✅ Efficiently finds a pair with the given sum in O(n) time & O(n) space! 🚀
+
+
+//Driver Code Starts{
+// C++ code to find a pair with given sum in a Balanced BST
+// Using Hash Set
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+class Node{
+  public:
+    int data;
+    Node *left, *right;
+    Node(int x){
+        data = x;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+//Driver Code Ends }
+
+
+// Helper function to perform DFS and check
+// for the required target.
+bool dfs(Node *root, unordered_set<int> &st, int target){
+  
+    if (root == nullptr)
+        return false;
+
+    // Check if the complement (target - current node's value)
+    // exists in the set
+    if (st.find(target - root->data) != st.end())
+        return true;
+
+    // Insert the current node's value into the set
+    st.insert(root->data);
+
+    // Continue the search in the left and right subtrees
+    return dfs(root->left, st, target) || dfs(root->right, st, target);
+}
+
+// Main function to check if two elements
+// in the BST target to target
+bool findTarget(Node *root, int target){
+  
+    // To store visited nodes' values
+    unordered_set<int> st;
+
+    // Start DFS from the root
+    return dfs(root, st, target);
+}
+
+
+//Driver Code Starts{
+int main(){
+    // Constructing the following BST:
+    //         7
+    //        / \
+    //       3   8
+    //      / \   \
+    //     2   4   9
+
+    Node *root = new Node(7);
+    root->left = new Node(3);
+    root->right = new Node(8);
+    root->left->left = new Node(2);
+    root->left->right = new Node(4);
+    root->right->right = new Node(9);
+
+    int target = 12;
+
+    // Check if there are two elements in the BST
+    // that added to "target"
+    if (findTarget(root, target))
+        cout << "True
+";
+    else
+        cout << "False
+";
+
+    return 0;
+}
+//Driver Code Ends }
