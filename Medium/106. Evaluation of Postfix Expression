@@ -1,0 +1,57 @@
+🌟 Day 106: GFG160 Challenge 🌟
+
+🔗 Problem: Evaluation of Postfix Expression
+
+💡 Approach: Using Stack
+1️⃣ Traverse expression, pushing numbers onto the stack.
+2️⃣ On encountering an operator, pop two values, compute, and push the result.
+3️⃣ The final stack value is the result.
+
+✅ O(n) Time | O(n) Space 🚀
+
+// C++ program to evaluate value of a postfix
+// expression Using Stack
+#include <iostream>
+#include <stack>
+#include <vector>
+using namespace std;
+
+// Function to evaluate a postfix expression given as a vector of strings
+int evaluatePostfix(vector<string>& arr) {
+    stack<int> st;
+
+    // Loop through each element in the vector
+    for (string token : arr) {
+        
+        // If it's an operand (number), push it onto
+        // the stack
+        if (isdigit(token[0]) || (token.size() > 1 && token[0] == '-')) {
+            st.push(stoi(token));
+        } 
+        
+        // Otherwise, it must be an operator
+        else {
+            int val1 = st.top();
+            st.pop();
+            int val2 = st.top();
+            st.pop();
+
+            if (token == "+") {
+                st.push(val2 + val1);
+            } else if (token == "-") {
+                st.push(val2 - val1);
+            } else if (token == "*") {
+                st.push(val2 * val1);
+            } else if (token == "/") {
+                st.push(val2 / val1);
+            }
+        }
+    }
+    return st.top();
+}
+
+int main() {
+    vector<string> arr = {"2", "3", "1", "*", "+", "9", "-"};
+    cout << evaluatePostfix(arr) << endl; 
+    return 0;
+}
