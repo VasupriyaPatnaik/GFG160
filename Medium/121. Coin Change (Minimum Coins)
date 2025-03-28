@@ -1,0 +1,47 @@
+🌟 Day 121: GFG160 Challenge 🌟
+
+🔗 Problem: Coin Change (Minimum Coins)
+
+💡 Approach: Bottom-Up DP (Tabulation)
+1️⃣ Use a DP table to track the minimum coins needed for each sum.
+2️⃣ Update: Include coin (1 + dp[i][sum - coins[i]]) or exclude (dp[i+1][sum]).
+3️⃣ Return the minimum coins required, or -1 if not possible. 🚀
+
+
+// C++ program to find minimum of coins
+// to make a given change sum
+#include<bits/stdc++.h>
+using namespace std;
+
+int minCoins(vector<int> &coins, int sum) {
+    vector<vector<int>> dp(coins.size(), vector<int>(sum+1, 0));
+    
+    for (int i=coins.size()-1; i>=0; i--) {
+        for (int j=1; j<=sum; j++) {
+            dp[i][j] = INT_MAX;
+            int take = INT_MAX, noTake = INT_MAX;
+            
+            // If we take coins[i] coin
+            if (j-coins[i]>=0) {
+                take = dp[i][j-coins[i]];
+                if (take != INT_MAX) take++;
+            }
+            
+            if (i+1<coins.size())
+            // not take the coin 
+                noTake = dp[i+1][j];
+            
+            dp[i][j] = min(take, noTake);
+        }
+    }
+    
+    if (dp[0][sum]!=INT_MAX) return dp[0][sum];
+    return -1;
+}
+
+int main() {
+    vector<int> coins =  {9, 6, 5, 1};
+    int sum = 19;
+    cout << minCoins(coins, sum);
+    return 0;
+}
