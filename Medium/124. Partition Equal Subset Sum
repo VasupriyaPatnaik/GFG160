@@ -1,0 +1,68 @@
+🌟 Day 124: GFG160 Challenge 🌟
+
+🔗 Problem: Partition Equal Subset Sum
+
+💡 Approach: Bottom-Up DP (Tabulation)
+1️⃣ Use a 2D DP table where dp[i][j] tracks if a subset with sum ‘j’ exists.
+2️⃣ Update: If arr[i-1] > j, inherit previous state; else, check inclusion/exclusion.
+3️⃣ Return whether a partition with equal sum exists. 🚀
+
+// C++ program to partition a Set 
+// into Two Subsets of Equal Sum
+// using top up approach 
+#include <bits/stdc++.h>
+using namespace std;
+
+// Returns true if arr[] can be partitioned in two
+// subsets of equal sum, otherwise false
+bool equalPartition(vector<int>& arr) {
+  
+    // Calculate sum of the elements in array
+    int sum = accumulate(arr.begin(), arr.end(), 0);
+    int n = arr.size();
+
+    // If sum is odd, there cannot be two 
+    // subsets with equal sum
+    if (sum % 2 != 0)
+        return false;
+        
+    sum = sum/2;
+    
+    // Create a 2D vector for storing results
+    // of subproblems
+    vector<vector<bool>> dp(n + 1, vector<bool>(sum + 1, false));
+
+    // If sum is 0, then answer is true (empty subset)
+    for (int i = 0; i <= n; i++)
+        dp[i][0] = true;
+
+    // Fill the dp table in bottom-up manner
+    for (int i = 1; i <= n; i++) {
+      
+        for (int j = 1; j <= sum; j++) {
+            if (j < arr[i - 1]) {
+              
+                // Exclude the current element
+                dp[i][j] = dp[i - 1][j]; 
+            }
+            else {
+              
+                // Include or exclude
+                dp[i][j] = dp[i - 1][j] 
+                || dp[i - 1][j - arr[i - 1]];
+            }
+        }
+    }
+
+    return dp[n][sum];
+}
+
+int main() {
+    vector<int> arr = { 1, 5, 11, 5};
+    if (equalPartition(arr)) {
+        cout << "True" << endl;
+    }else{
+        cout << "False" << endl;
+    }
+    return 0;
+}
