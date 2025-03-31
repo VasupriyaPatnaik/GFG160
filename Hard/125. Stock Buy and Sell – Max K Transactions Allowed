@@ -1,0 +1,53 @@
+🌟 Day 125: GFG160 Challenge 🌟
+
+🔗 Problem: Stock Buy and Sell – Max K Transactions
+
+💡 Approach: Bottom-Up DP (Tabulation)
+1️⃣ Use dp[i][l][buy] to track max profit at day i with l transactions remaining.
+2️⃣ Update:
+Buy: dp[i][l][1] = max(dp[i+1][l][0] - prices[i], dp[i+1][l][1])
+Sell: dp[i][l][0] = max(prices[i] + dp[i+1][l-1][1], dp[i+1][l][0])
+3️⃣ Return dp[0][k][1] as the max profit. 🚀
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to return max profit from k
+// transactions
+int maxProfit(vector<int> &prices, int k){
+    int n = prices.size();
+    if (n == 0 || k == 0)
+        return 0;
+
+    // DP table to store the maximum profit:
+    // dp[day][l][buy_or_sell]
+    vector<vector<vector<int>>> dp(n + 1,
+         vector<vector<int>>(k + 1, 
+                             vector<int>(2, 0)));
+
+    // Iterate from last day to the first (bottom-up)
+    for (int i = n - 1; i >= 0; i--){
+        for (int l = 1; l <= k; l++){
+
+            // Buy state
+            dp[i][l][1] = max(dp[i + 1][l][0] 
+                      - prices[i], dp[i + 1][l][1]);
+
+            // Sell state
+            dp[i][l][0] = max(prices[i] 
+            + dp[i + 1][l - 1][1], dp[i + 1][l][0]);
+        }
+    }
+
+    // Result is maximum profit starting from day 0,
+    // with k transactions, and in buy state
+    return dp[0][k][1];
+}
+
+int main(){
+    int k = 2;
+    vector<int> prices = {10, 22, 5, 80};
+    cout << maxProfit(prices, k) << endl;
+
+    return 0;
+}
