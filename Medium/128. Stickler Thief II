@@ -1,0 +1,62 @@
+🌟 Day 128: GFG160 Challenge 🌟
+
+🔗 Problem: Stickler Thief II
+
+💡 Approach: Top-Down DP (Memoization)
+1️⃣ Use a 1D dp[] to store max loot for subproblems.
+2️⃣ Transition: dp[j] = max(arr[j] + dp[j-2], dp[j-1]).
+3️⃣ Handle circular case by considering two subarrays (excluding first or last house). 🚀
+
+// C++ Program to solve House Robber Problem 2
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Calculate the maximum stolen value recursively
+int maxValRec(vector<int> &arr, int i, int j, vector<int> &memo) {
+    
+    // If no houses are left, return 0.
+    if (i> j)  return 0;
+  
+      // If only 1 house is left, rob it. 
+    if (i == j)  return arr[i];
+    
+    // If value is memoized
+    if (memo[j] != -1) return memo[j];
+
+    // Two Choices: 
+    // Rob the jth house and skip the (j-1)th house 
+    int pick = arr[j] + maxValRec(arr, i, j-2, memo);
+    
+    // Skip the jth house
+    int notPick = maxValRec(arr, i, j-1, memo);
+
+    // Return the max of two choices
+    return memo[j] = max(pick, notPick);
+}
+
+// Function to calculate the maximum stolen value
+int maxValue(vector<int>& arr) {
+    int n = arr.size();
+  
+    int ans = 0;
+    
+    vector<int> memo(n, -1);
+    
+    // Skip the last house
+    ans = max(ans, maxValRec(arr, 0, n-2, memo));
+    
+    // Reset the memo array
+    for (int i=0; i<n; i++) memo[i] = -1;
+    
+    // Skip the first house 
+    ans = max(ans, maxValRec(arr, 1, n-1, memo));
+    
+    return ans;
+}
+
+int main() {
+    vector<int> arr = {2, 2, 3, 1, 2};
+    cout << maxValue(arr);
+    return 0;
+}
