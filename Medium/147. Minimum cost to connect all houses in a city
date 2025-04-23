@@ -1,0 +1,83 @@
+🌟 Day 147: GFG160 Challenge 🌟
+🔗 Problem: Minimum Cost to Connect All Houses in a City
+
+💡 Approach: Minimum Spanning Tree (Prim’s Algorithm)
+Each house is treated as a node, and the cost between two is the Manhattan Distance.
+The goal? Connect all houses with minimum total cost.
+
+🧠 Steps:
+1️⃣ Start from any house (say 0), push all distances to others into a min-heap
+2️⃣ Pick the house with the lowest unvisited cost, add it to total
+3️⃣ Push distances from that house to all unvisited houses
+🔁 Repeat until all are connected
+
+✅ Efficiency: O(n² * log(n)) Time | O(n²) Space
+
+🛠️ Built MST from scratch with Prim’s logic for a grid-based connection challenge!
+
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <cmath>
+using namespace std;
+
+// Calculates Manhattan Distance between two houses
+int manhattanDistance(vector<int>& a, vector<int>& b) {
+    return abs(a[0] - b[0]) + abs(a[1] - b[1]);
+}
+
+// Returns the minimum cost to connect
+// all houses using Prim's algorithm
+int minCost(vector<vector<int>>& houses) {
+    
+    int n = houses.size();
+    
+    // Min-heap to store {cost, house_index}
+    priority_queue<pair<int, int>, vector<pair<int, int>>, 
+                                 greater<>> minHeap;
+
+    // Marks whether a house is already connected
+    vector<bool> visited(n, false);
+
+    // Start with the first house (index 0)
+    minHeap.push({0, 0});
+
+    int totalCost = 0;
+
+    while (!minHeap.empty()) {
+        pair<int, int> p = minHeap.top(); minHeap.pop();
+        int cost = p.first;
+        int u = p.second;
+
+        // Skip if already connected
+        if (visited[u]) continue;
+
+        // Mark the house as connected and add the cost
+        visited[u] = true;
+        totalCost += cost;
+
+        // Calculate distance to all unvisited houses and add to heap
+        for (int v = 0; v < n; ++v) {
+            if (!visited[v]) {
+                int dist = manhattanDistance(houses[u], houses[v]);
+                minHeap.push({dist, v});
+            }
+        }
+    }
+
+    return totalCost;
+}
+
+int main() {
+    
+    vector<vector<int>> houses = {
+        {0, 7}, {0, 9}, {20, 7}, {30, 7}, {40, 70}
+    };
+    
+    int result = minCost(houses);
+
+    cout << result << endl;
+
+    return 0;
+}
