@@ -1,0 +1,38 @@
+🌟 Day 159: GFG160 Challenge 🌟
+
+🔗 Problem: Unique Number I
+📌 Topic: Bit Manipulation (XOR)
+
+🧠 Approach:
+1️⃣ Traverse the array and XOR all elements
+2️⃣ Pairs cancel out as x ^ x = 0
+3️⃣ The result is the unique number that appears only once
+
+🛠️ Time: O(n)
+💾 Space: O(1)
+
+⚡ Elegant and powerful — XOR strikes again!
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findUnique(vector<int>& arr) {
+    int n = arr.size();
+    
+    int res = 0;
+    
+    // Find XOR of all elements
+    for (int i = 0; i < n; i++) {
+        res = res ^ arr[i];
+    }
+    
+    return res;
+}
+
+int main() {
+    vector<int> arr = { 2, 3, 5, 4, 5, 3, 4 };
+    cout << findUnique(arr) << endl;
+    return 0;
+}
